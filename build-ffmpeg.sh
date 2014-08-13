@@ -3,7 +3,7 @@
 ###########################################################################
 #  Choose your ffmpeg version and your currently-installed iOS SDK version:
 #
-VERSION="2.0.2"
+VERSION="2.3"
 SDKVERSION="7.1"
 MINIVERSION="6.1"
 
@@ -61,8 +61,6 @@ fi
 tar zxf ffmpeg-${VERSION}.tar.bz2 -C $SRCDIR
 cd "${SRCDIR}/ffmpeg-${VERSION}"
 
-patch -p1 < ../../../rtp.patch
- 
 set +e # don't bail out of bash script if ccache doesn't exist
 CCACHE=`which ccache`
 if [ $? == "0" ]; then
@@ -112,6 +110,7 @@ do
         --enable-version3 \
         --enable-gpl \
         --enable-avresample \
+	--enable-swresample \
         --enable-protocols \
         --enable-demuxers \
         --disable-demuxer=sbg \
